@@ -15,6 +15,8 @@ import {
   UpdateExpenseUseCase,
   DeleteExpensesUseCase,
   ReactivateExpensesUseCase,
+  GenerateExpenseTemplateUseCase,
+  ImportExpensesUseCase,
 } from '../use-cases';
 import { BaseApiResponse } from 'src/utils/base-response/BaseApiResponse.dto';
 import { PaginationParams } from 'src/utils/paginated-response/pagination.types';
@@ -38,6 +40,8 @@ export class ExpenseService {
     private readonly updateExpenseUseCase: UpdateExpenseUseCase,
     private readonly deleteExpensesUseCase: DeleteExpensesUseCase,
     private readonly reactivateExpensesUseCase: ReactivateExpensesUseCase,
+    private readonly generateExpenseTemplateUseCase: GenerateExpenseTemplateUseCase,
+    private readonly importExpensesUseCase: ImportExpensesUseCase,
     private readonly auditService: AuditService,
   ) {
     this.errorHandler = new BaseErrorHandler(
@@ -178,13 +182,23 @@ export class ExpenseService {
         };
       }
 
-      // Búsqueda simple en campos del gasto
+      // Búsqueda simple en campos del gasto (usar OR para buscar en múltiples campos)
       if (filters.search) {
-        filterOptions.searchByField = {
-          ...filterOptions.searchByField,
-          description: filters.search,
-          documentNumber: filters.search,
-        };
+        // Usar OR como array directo (formato soportado por buildWhereClause)
+        filterOptions.OR = [
+          {
+            description: {
+              contains: filters.search,
+              mode: 'insensitive',
+            },
+          },
+          {
+            documentNumber: {
+              contains: filters.search,
+              mode: 'insensitive',
+            },
+          },
+        ] as any;
       }
 
       // Usar el BaseRepository con filtros avanzados
@@ -981,5 +995,32 @@ export class ExpenseService {
       'diciembre',
     ];
     return months[month - 1];
+  }
+
+  /**
+   * Generar plantilla Excel para importación de gastos
+   * @returns Workbook con el archivo Excel
+   */
+  async generateExpenseTemplate() {
+    return await this.generateExpenseTemplateUseCase.execute();
+  }
+
+  /**
+   * Importar gastos desde un archivo Excel
+   * @param file Archivo Excel
+   * @param continueOnError Continuar con la importación si hay errores
+   * @param user Usuario que realiza la acción
+   * @returns Reporte de la importación
+   */
+  async importFromExcel(
+    file: Express.Multer.File,
+    continueOnError: boolean,
+    user: UserData,
+  ) {
+    return await this.importExpensesUseCase.execute(
+      file,
+      continueOnError,
+      user,
+    );
   }
 }

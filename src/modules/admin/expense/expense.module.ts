@@ -8,6 +8,8 @@ import {
   UpdateExpenseUseCase,
   DeleteExpensesUseCase,
   ReactivateExpensesUseCase,
+  GenerateExpenseTemplateUseCase,
+  ImportExpensesUseCase,
 } from './use-cases';
 import { ExpenseRepository } from './repositories/expense.repository';
 
@@ -22,6 +24,8 @@ import { ExpenseRepository } from './repositories/expense.repository';
     UpdateExpenseUseCase,
     DeleteExpensesUseCase,
     ReactivateExpensesUseCase,
+    GenerateExpenseTemplateUseCase,
+    ImportExpensesUseCase,
   ],
   exports: [ExpenseService, ExpenseRepository],
 })
