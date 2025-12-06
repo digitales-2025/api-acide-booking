@@ -7,8 +7,16 @@ import {
   Param,
   Delete,
   Query,
+  Res,
+  Header,
+  UploadedFile,
+  BadRequestException,
+  UseInterceptors,
+  ParseFilePipeBuilder,
+  HttpStatus,
 } from '@nestjs/common';
 import { ExpenseService } from '../services/expense.service';
+import { Response } from 'express';
 
 import {
   ApiTags,
@@ -20,6 +28,7 @@ import {
   ApiOkResponse,
   ApiNotFoundResponse,
   ApiQuery,
+  ApiConsumes,
   getSchemaPath,
 } from '@nestjs/swagger';
 import { UserData } from 'src/interfaces';
@@ -27,6 +36,7 @@ import {
   CreateHotelExpenseDto,
   UpdateHotelExpenseDto,
   DeleteHotelExpenseDto,
+  ImportExpensesDto,
 } from '../dto';
 import { HotelExpenseEntity } from '../entities/expense.entity';
 import { BaseApiResponse } from 'src/utils/base-response/BaseApiResponse.dto';
@@ -35,6 +45,8 @@ import {
   PaginatedResponse,
   PaginationMetadata,
 } from 'src/utils/paginated-response/PaginatedResponse.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { HttpResponse } from 'src/interfaces';
 
 /**
  * Controlador REST para gestionar gastos del hotel.
@@ -85,6 +97,92 @@ export class ExpenseController {
   })
   findAll(): Promise<HotelExpenseEntity[]> {
     return this.expenseService.findAll();
+  }
+
+  /**
+   * Descarga la plantilla Excel para importar gastos
+   */
+  @Get('import/template')
+  @ApiOperation({ summary: 'Descargar plantilla Excel para importar gastos' })
+  @ApiResponse({
+    status: 200,
+    description: 'Plantilla Excel para importar gastos',
+  })
+  @Header(
+    'Content-Type',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  )
+  @Header('Content-Disposition', 'attachment; filename=plantilla_gastos.xlsx')
+  async downloadTemplate(@Res() res: Response) {
+    const workbook = await this.expenseService.generateExpenseTemplate();
+
+    // Configurar el response
+    res.setHeader(
+      'Content-Type',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    );
+    res.setHeader(
+      'Content-Disposition',
+      'attachment; filename=plantilla_gastos.xlsx',
+    );
+
+    // Enviar el archivo
+    await workbook.xlsx.write(res);
+    res.end();
+  }
+
+  /**
+   * Importa gastos desde un archivo Excel
+   */
+  @Post('import')
+  @UseInterceptors(FileInterceptor('file'))
+  @ApiConsumes('multipart/form-data')
+  @ApiOperation({ summary: 'Importar gastos desde archivo Excel' })
+  @ApiResponse({
+    status: 200,
+    description: 'Gastos importados exitosamente',
+  })
+  @ApiBadRequestResponse({
+    description: 'Archivo inválido o datos incorrectos',
+  })
+  importExpenses(
+    @UploadedFile(
+      new ParseFilePipeBuilder()
+        .addFileTypeValidator({
+          fileType:
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        })
+        .addMaxSizeValidator({
+          maxSize: 5 * 1024 * 1024, // 5MB
+        })
+        .build({
+          errorHttpStatusCode: HttpStatus.BAD_REQUEST,
+        }),
+    )
+    file: Express.Multer.File,
+    @Body() importExpensesDto: ImportExpensesDto,
+    @GetUser() user: UserData,
+  ): Promise<
+    HttpResponse<{
+      total: number;
+      successful: number;
+      failed: number;
+      errors: Array<{
+        row: number;
+        data: Record<string, unknown>;
+        error: string;
+      }>;
+    }>
+  > {
+    if (!file) {
+      throw new BadRequestException('No se ha proporcionado ningún archivo');
+    }
+
+    return this.expenseService.importFromExcel(
+      file,
+      importExpensesDto.continueOnError || false,
+      user,
+    );
   }
 
   /**
