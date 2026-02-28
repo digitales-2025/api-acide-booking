@@ -609,8 +609,8 @@ export class OccupancyReportUseCase {
           } else if (reason.percentageOfTotal > 15) {
             cell.font = {
               bold: true,
-              color: { argb: `FF${colors.DARK_GOLD}` },
-            }; // Dorado oscuro para medio porcentaje
+              color: { argb: `FF${colors.DARK_ACCENT}` },
+            };
           }
         } else if (colNumber === 7) {
           // Columna de prioridad
@@ -621,8 +621,8 @@ export class OccupancyReportUseCase {
           } else if (priority === 'Media') {
             cell.font = {
               bold: true,
-              color: { argb: `FF${colors.DARK_GOLD}` },
-            }; // Dorado oscuro para media prioridad
+              color: { argb: `FF${colors.DARK_ACCENT}` },
+            };
           } else {
             cell.font = { bold: true, color: { argb: `FF${colors.SUCCESS}` } }; // Verde corporativo para baja prioridad
           }

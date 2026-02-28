@@ -1,7 +1,8 @@
 import { z } from 'zod';
-import 'dotenv';
+import * as path from 'path';
+import * as dotenv from 'dotenv';
 
-// dotenv.config({ path: `.env` });
+dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 
 type NODE_ENV = 'development' | 'production' | 'test';
 

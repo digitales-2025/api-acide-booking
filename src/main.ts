@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import * as cookieParser from 'cookie-parser';
+import cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
 import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -38,8 +38,8 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
-    .setTitle('Almohada del Rey API')
-    .setDescription('API for Almohada del Rey')
+    .setTitle('Hotel Prototype API')
+    .setDescription('API for Hotel Prototype')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);

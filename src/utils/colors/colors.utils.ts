@@ -1,23 +1,22 @@
 export const colors = {
-  PRIMARY: 'AF8C4F', // Dorado corporativo
-  SECONDARY: '27272A', // Gris oscuro corporativo
-  LIGHT_GOLD: 'E6D4B7', // Dorado claro para fondos
-  DARK_GOLD: '8B6914', // Dorado oscuro para acentos
-  WHITE: 'FFFFFF', // Blanco
-  LIGHT_GRAY: 'F5F5F5', // Gris muy claro
-  MEDIUM_GRAY: '6B7280', // Gris medio
-  BORDER: 'D1D5DB', // Gris para bordes
-  SUCCESS: '059669', // Verde para valores positivos
-  WARNING: 'DC2626', // Rojo para alertas
-  // Colores específicos para el reporte
-  headerBg: 'FF27272A', // Gris oscuro corporativo
-  headerText: 'FFFFFFFF', // Blanco
-  titleBg: 'FFAF8C4F', // Dorado corporativo
-  subTitleBg: 'FFE6D4B7', // Dorado claro
-  alternateBg: 'FFF5F5F5', // Gris muy claro para filas alternadas
-  highlightBg: 'FFE6D4B7', // Dorado claro para destacados
-  arrivalsColor: 'FF059669', // Verde para arribos
-  overnightsColor: 'FFDC2626', // Rojo para pernoctaciones
-  borderColor: 'FFD1D5DB', // Gris para bordes
-  totalsBg: 'FFE6D4B7', // Dorado claro para totales
+  PRIMARY: '18181B', // zinc-900
+  SECONDARY: '27272A', // zinc-800
+  LIGHT_SURFACE: 'E4E4E7', // zinc-200
+  DARK_ACCENT: '52525B', // zinc-600
+  WHITE: 'FFFFFF',
+  LIGHT_GRAY: 'FAFAFA', // zinc-50
+  MEDIUM_GRAY: '71717A', // zinc-500
+  BORDER: 'D4D4D8', // zinc-300
+  SUCCESS: '059669',
+  WARNING: 'DC2626',
+  headerBg: 'FF18181B', // zinc-900
+  headerText: 'FFFFFFFF',
+  titleBg: 'FF27272A', // zinc-800
+  subTitleBg: 'FFE4E4E7', // zinc-200
+  alternateBg: 'FFF4F4F5', // zinc-100
+  highlightBg: 'FFD4D4D8', // zinc-300
+  arrivalsColor: 'FF059669',
+  overnightsColor: 'FFDC2626',
+  borderColor: 'FFD4D4D8', // zinc-300
+  totalsBg: 'FFD4D4D8', // zinc-300
 };

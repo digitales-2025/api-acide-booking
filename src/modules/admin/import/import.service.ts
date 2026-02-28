@@ -2086,8 +2086,8 @@ export class ImportService {
       const resultWorkbook = new ExcelJS.Workbook();
 
       // Metadatos corporativos
-      resultWorkbook.creator = 'Hotel La Almohada del Rey';
-      resultWorkbook.company = 'Hotel La Almohada del Rey';
+      resultWorkbook.creator = 'Hotel Prototype';
+      resultWorkbook.company = 'Hotel Prototype';
       resultWorkbook.subject = 'Análisis de Estado de Importación';
       resultWorkbook.description =
         'Análisis detallado de registros importados y faltantes';
@@ -2173,7 +2173,7 @@ export class ImportService {
     worksheet.getRow(1).height = 10;
 
     // Fila 2: Título principal
-    const titleRow = worksheet.addRow(['HOTEL LA ALMOHADA DEL REY']);
+    const titleRow = worksheet.addRow(['HOTEL PROTOTYPE']);
     worksheet.mergeCells('A2:AJ2');
     const titleCell = worksheet.getCell('A2');
     titleCell.font = {
