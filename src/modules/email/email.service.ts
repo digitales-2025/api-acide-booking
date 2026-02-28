@@ -5,11 +5,11 @@ import { EventPayloads } from 'src/interfaces/event-types.interface';
 import { getFirstWord } from 'src/utils';
 
 const infoBusiness = {
-  business: 'La Almohada del Rey',
-  url: 'https://admin.hotelalmohadadelrey.com',
-  phone: '+51 958 959 958',
-  address: 'Calle Mollendo N° 37 - Urbanización Municipal., Arequipa, Peru',
-  contact: 'gestion.almohadadelrey@gmail.com',
+  business: 'Hotel Prototype',
+  url: 'https://admin.hotelprototype.com',
+  phone: '+51 955 888 888',
+  address: 'Ubicación del hotel',
+  contact: 'hotelprototype@gmail.com',
 };
 
 @Injectable()

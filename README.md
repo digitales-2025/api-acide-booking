@@ -1,6 +1,5 @@
-# API Almohada Rey
-
-API backend para el sistema de gestión hotelera Almohada Rey.
+# API Acide Booking
+API backend para el sistema de gestión hotelera Acide Booking.
 
 ## 🚀 Inicio Rápido
 

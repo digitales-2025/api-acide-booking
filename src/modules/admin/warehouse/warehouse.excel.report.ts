@@ -48,8 +48,8 @@ export class WarehouseExcelReport {
       const workbook = new ExcelJS.Workbook();
 
       // Metadatos corporativos
-      workbook.creator = 'Hotel La Almohada del Rey';
-      workbook.company = 'Hotel La Almohada del Rey';
+      workbook.creator = 'Hotel Prototype';
+      workbook.company = 'Hotel Prototype';
       workbook.subject = 'Reporte de Stock de Almacén';
       workbook.description = `Reporte detallado del stock del almacén ${warehouseData.code}`;
       workbook.created = new Date();
@@ -84,7 +84,7 @@ export class WarehouseExcelReport {
       worksheet.getRow(1).height = 10;
 
       // Fila 2: Título principal con diseño corporativo
-      const titleRow = worksheet.addRow(['HOTEL LA ALMOHADA DEL REY']);
+      const titleRow = worksheet.addRow(['HOTEL PROTOTYPE']);
       worksheet.mergeCells('A2:G2');
       const titleCell = worksheet.getCell('A2');
       titleCell.font = {
@@ -530,7 +530,7 @@ export class WarehouseExcelReport {
         cell.fill = {
           type: 'pattern',
           pattern: 'solid',
-          fgColor: { argb: colors.LIGHT_GOLD },
+          fgColor: { argb: colors.LIGHT_SURFACE },
         };
         cell.border = {
           top: { style: 'thin', color: { argb: colors.BORDER } },
@@ -582,8 +582,7 @@ export class WarehouseExcelReport {
       const lastRow = worksheet.lastRow.number + 1;
       worksheet.mergeCells(`A${lastRow}:G${lastRow}`);
       const footerCell = worksheet.getCell(`A${lastRow}`);
-      footerCell.value =
-        'Hotel La Almohada del Rey - Sistema de Gestión de Inventario';
+      footerCell.value = 'Hotel Prototype - Sistema de Gestión de Inventario';
       footerCell.font = {
         italic: true,
         size: 12,

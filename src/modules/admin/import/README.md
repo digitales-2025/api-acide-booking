@@ -1,6 +1,6 @@
 # Módulo de Importación de Excel
 
-Este módulo permite importar datos históricos desde archivos Excel al sistema de Almohada del Rey.
+Este módulo permite importar datos históricos desde archivos Excel al sistema de Acide Booking.
 
 ## Endpoint
 

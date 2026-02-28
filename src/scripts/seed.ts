@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from '../app.module';
 import { SeedsService } from '../modules/seeds/seeds.service';
 import { Logger } from '@nestjs/common';
-import * as cookieParser from 'cookie-parser';
+import cookieParser from 'cookie-parser';
 
 async function runSeeds() {
   // Crear contexto de aplicación completo (no solo ApplicationContext)

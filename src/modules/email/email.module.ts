@@ -23,7 +23,7 @@ import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter';
           },
         },
         defaults: {
-          from: 'Almohada del Rey',
+          from: 'Hotel Prototype',
         },
         template: {
           dir: join(__dirname, 'templates'),
