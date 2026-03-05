@@ -17,7 +17,7 @@ services:
     labels:
       - "traefik.enable=true"
 
-      - "traefik.http.routers.almohada-backend-ws.rule=Host(`almohada-backend-develop.acide.win`) && PathPrefix(`/socket.io`)"
+      - "traefik.http.routers.almohada-backend-ws.rule=Host(`api-hotelprototype.acide.win`) && PathPrefix(`/socket.io`)"
       - "traefik.http.routers.almohada-backend-ws.priority=45"
       - "traefik.http.routers.almohada-backend-ws.service=almohada-backend-develop"
       - "traefik.http.routers.almohada-backend-ws.entrypoints=websecure"
@@ -27,7 +27,7 @@ services:
       - "traefik.http.routers.almohada-backend-ws.tls.domains[0].sans=*.acide.win"
       - "traefik.http.services.almohada-backend-ws.loadbalancer.server.port=5000"
 
-      - "traefik.http.routers.almohada-backend-develop.rule=Host(`almohada-backend-develop.acide.win`)"
+      - "traefik.http.routers.almohada-backend-develop.rule=Host(`api-hotelprototype.acide.win`)"
       - "traefik.http.routers.almohada-backend-develop.priority=44"
       - "traefik.http.routers.almohada-backend-develop.service=almohada-backend-develop"
       - "traefik.http.routers.almohada-backend-develop.entrypoints=websecure"

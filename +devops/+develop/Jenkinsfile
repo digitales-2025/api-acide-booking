@@ -3,7 +3,7 @@ pipeline {
 	environment {
 		BUILD_REF = sh(script: "echo -n '${BUILD_TAG}' | sha256sum | cut -c1-12", returnStdout: true).trim()
 
-		PROJECT_NAME    = "almohada"
+		PROJECT_NAME    = "booking"
 		PROJECT_SERVICE = "unset"  // MUST BE SPECIFIED
 		PROJECT_STAGE   = "develop"
 		PROJECT_TRIPLET = "..." // MUST BE SPECIFIED
@@ -21,7 +21,7 @@ pipeline {
 		SSH_CRED = "ssh-id_docker_admin"
 
 		// ansible variables
-		PROJECT_SERVICES  = "backend,frontend,landing"
+		PROJECT_SERVICES  = "backend,frontend"
 	}
 	stages {
 		stage("Create ansible inventory") {
