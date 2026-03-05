@@ -21,6 +21,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "prepare": "husky || true",
+    "prisma": "prisma",
     "seed": "ts-node -r tsconfig-paths/register src/scripts/seed.ts",
     "seed:manual": "echo '⚠️  Los seeds ahora se ejecutan automáticamente al iniciar la aplicación. Este comando es solo para casos especiales.' && ts-node -r tsconfig-paths/register src/scripts/seed.ts"
   },
@@ -56,6 +57,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "cookie-parser": "^1.4.7",
+    "prisma": "^6.5.0",
     "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",
     "dotenv": "^16.4.7",
@@ -93,7 +95,6 @@
     "jest-mock": "^29.7.0",
     "lint-staged": "^15.4.3",
     "prettier": "^3.0.0",
-    "prisma": "^6.5.0",
     "source-map-support": "^0.5.21",
     "supertest": "^7.0.0",
     "ts-jest": "^29.2.6",

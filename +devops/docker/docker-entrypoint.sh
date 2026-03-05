@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Migrations
-pnpx prisma migrate deploy
+pnpm run prisma migrate deploy
 
 # Start
 npm run start:prod
